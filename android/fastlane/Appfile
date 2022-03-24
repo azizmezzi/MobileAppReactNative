@@ -1,0 +1,2 @@
+json_key_file("./pc-api-7875944570745732455-593-3202a8e8281f.json") # Path to the json secret file - Follow https://docs.fastlane.tools/actions/supply/#setup to get one
+package_name("com.nooba") # e.g. com.krausefx.app

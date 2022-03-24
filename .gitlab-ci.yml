@@ -1,0 +1,106 @@
+stages:
+  - test
+  - analyze
+  - deploy
+
+test:
+  stage: test
+  when: manual
+  tags:
+    - rntest
+  before_script:
+    - yarn install
+  script:
+    - yarn test
+  artifacts:
+    when: always
+    reports:
+      junit:
+        - junit.xml
+  only:
+    - merge_requests
+    - master
+    - develop
+
+analyze:
+  stage: analyze
+  tags:
+    - rnanalyze
+  variables:
+    SONAR_USER_HOME: '${CI_PROJECT_DIR}/.sonar'
+    GIT_DEPTH: 0
+  cache:
+    key: '${CI_JOB_NAME}'
+    paths:
+      - .sonar/cache
+  script:
+    - sonar-scanner -D"sonar.projectKey=Nooba" -D"sonar.sources=." -D"sonar.host.url=${SONAR_HOST_URL}" -D"sonar.login=${SONAR_TOKEN}"
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: on_success
+    - when: never
+  needs: [test]
+
+.job_template: &job_deploy
+  stage: deploy
+  before_script:
+    # - bundle config set --local path 'vendor/bundle'
+    - yarn install
+  after_script:
+    - cp $OUTPUT_PATH.$FILE_TYPE $CI_PROJECT_NAME-$CI_COMMIT_REF_NAME.$FILE_TYPE
+  artifacts:
+    name: '$CI_PROJECT_NAME-$PLATFORM-$CI_COMMIT_REF_NAME'
+    paths:
+      - $CI_PROJECT_NAME-$CI_COMMIT_REF_NAME.$FILE_TYPE
+    expire_in: 7 days
+  # when: on_success
+  needs: [analyze]
+  rules:
+    - if: '$CI_COMMIT_BRANCH == "master"'
+      when: on_success
+    - when: never
+
+deploy:android:prod:
+  tags:
+    # - rnbuild_android
+    - serveur
+  variables:
+    PLATFORM: android
+    FILE_TYPE: apk
+    OUTPUT_PATH: android/app/build/outputs/apk/release/app-release
+  <<: *job_deploy
+  script:
+    - cd android && ./gradlew assembleRelease -PMYAPP_RELEASE_STORE_PASSWORD=$KEYSTORE_PASSWORD -PMYAPP_RELEASE_KEY_PASSWORD=$KEYSTORE_PASSWORD
+
+deploy:ios:prod:
+  tags:
+    - rnbuild_ios
+  variables:
+    PLATFORM: ios
+    FILE_TYPE: ipa
+    OUTPUT_PATH: ./$CI_PROJECT_NAME
+  <<: *job_deploy
+  script:
+    #- export PACKAGE_NAME=$(node -p -e "require('./package.json').name")
+    - cd ios
+    - pod install
+    - python3 mod.py
+    - fastlane beta
+    #- xcodebuild -quiet -workspace $PACKAGE_NAME.xcworkspace -scheme $PACKAGE_NAME clean archive -configuration release  -sdk iphoneos -archivePath $PACKAGE_NAME.xcarchive
+    #- xcodebuild -quiet -exportArchive -archivePath ./$PACKAGE_NAME.xcarchive -exportPath . -exportOptionsPlist $PACKAGE_NAME/Info.plist
+    #- mv $PACKAGE_NAME.ipa ../$PACKAGE_NAME.ipa
+
+deploy:android:playStore:
+  tags:
+    # - rnbuild_android
+    - serveur
+  variables:
+    LC_ALL: 'en_US.UTF-8'
+    LANG: 'en_US.UTF-8'
+  <<: *job_deploy
+  script:
+    - cd android
+    - fastlane add_plugin firebase_app_distribution
+    - fastlane add_plugin load_json
+    - fastlane add_plugin versioning_android
+    - fastlane playstoreInternal RELEASE_KEYSTORE_PASSWORD:$KEYSTORE_PASSWORD RELEASE_KEYSTORE_ALIAS:$KEYSTORE_ALIAS RELEASE_KEYSTORE_KEY_PASSWORD:$KEYSTORE_PASSWORD

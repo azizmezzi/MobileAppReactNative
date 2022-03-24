@@ -1,0 +1,246 @@
+/* eslint-disable no-underscore-dangle */
+import React, {Component} from 'react';
+import {Text, StyleSheet, View} from 'react-native';
+import PropTypes from 'prop-types';
+import IconFa from 'react-native-vector-icons/FontAwesome5';
+import {Button} from 'react-native-paper';
+import Spinner from 'react-native-loading-spinner-overlay';
+import AwesomeAlert from 'react-native-awesome-alerts';
+import {PublierEventProvider} from '../../provider/events';
+import colors from '../../constant/colors';
+import {h, w, totalSize} from '../../tools/Dimensions';
+import HeaderComponent from '../landingComponents/HeaderComponent';
+import MainComponent from '../landingComponents/MainComponent';
+import {NoobaContext} from '../../provider/provider';
+import texts from '../../constant/texts';
+
+const styles = StyleSheet.create({
+  mainText: {
+    color: 'white',
+    textAlign: 'center',
+    fontSize: totalSize(3),
+    textTransform: 'uppercase',
+  },
+  questionText: {
+    marginTop: h(5),
+    textAlign: 'center',
+    color: 'white',
+    fontSize: totalSize(3),
+    fontWeight: 'bold',
+    textTransform: 'uppercase',
+  },
+  descriptionText: {
+    marginTop: h(3),
+    marginHorizontal: w(5),
+    textAlign: 'center',
+    color: 'white',
+    fontSize: totalSize(2.4),
+  },
+  ButtonInscrit: {
+    marginBottom: h(5),
+    alignSelf: 'center',
+    marginLeft: w(1),
+    marginRight: w(1),
+    color: 'white',
+    borderColor: 'white',
+    height: h(5),
+    width: w(47),
+  },
+  centerView: {
+    alignItems: 'center',
+    marginBottom: h(10),
+  },
+  mainBrownText: (pro) => {
+    return {
+      color: pro ? colors.proBlue : colors.brown,
+      textTransform: 'uppercase',
+      fontSize: totalSize(2.1),
+      marginLeft: w(3),
+      fontWeight: 'bold',
+    };
+  },
+});
+
+export default class PublierEvent extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {showAlert: false, title: '', message: '', spinner: false};
+  }
+
+  hideAlert = () => {
+    this.setState({
+      showAlert: false,
+      title: '',
+      message: '',
+    });
+  };
+
+  Content = () => {
+    const {
+      navigation,
+      route: {
+        params: {eventId},
+      },
+    } = this.props;
+    const {
+      context: {pro, balance},
+    } = this;
+    return (
+      <>
+        <View>
+          <Text style={styles.questionText}>Publier Votre évènement</Text>
+          <View
+            style={{
+              alignSelf: 'center',
+              width: w(100),
+              height: h(20),
+              justifyContent: 'center',
+              alignContent: 'center',
+              alignItems: 'center',
+            }}>
+            <IconFa color="white" size={w(15)} name="calendar-check" />
+          </View>
+
+          <Text style={styles.descriptionText}>
+            Vous êtes sur le point de publier votre évènement
+          </Text>
+        </View>
+        <Text style={{...styles.mainBrownText(pro), marginLeft: w(5), marginTop: h(7)}}>
+          vous avez actuellement :
+        </Text>
+        <View style={{...styles.centerView}}>
+          <View style={{flexDirection: 'row', marginTop: h(6)}}>
+            <IconFa name="coins" size={totalSize(2.7)} color="gold" />
+            <Text
+              style={{
+                color: 'white',
+                fontSize: totalSize(2.5),
+                textTransform: 'uppercase',
+              }}>
+              {`  ${balance} Jeton(s)`}
+            </Text>
+          </View>
+        </View>
+
+        <View
+          style={{
+            flexDirection: 'row',
+            alignSelf: 'center',
+            alignContent: 'center',
+            alignItems: 'center',
+
+            justifyContent: 'center',
+          }}>
+          <Button
+            color="white"
+            mode="outlined"
+            style={styles.ButtonInscrit}
+            labelStyle={{
+              fontSize: totalSize(1.4),
+              textTransform: 'none',
+            }}
+            onPress={async () => {
+              navigation.goBack();
+            }}>
+            Annuler
+          </Button>
+          <Button
+            color="white"
+            mode="outlined"
+            style={{...styles.ButtonInscrit, backgroundColor: '#64A549'}}
+            labelStyle={{fontSize: totalSize(1.4), textTransform: 'none'}}
+            onPress={async () => {
+              const {user, events, setEvents, ShowEvent, setBalance} = this.context;
+              if (!user.illimte && balance < 1) {
+                this.setState({
+                  showAlert: true,
+                  title: texts.balanceErrorTitle,
+                  message: texts.balanceErrorText,
+                });
+                return false;
+              }
+              this.setState({spinner: true});
+              PublierEventProvider(eventId, user.token)
+                .then((response) => {
+                  this.setState({spinner: false});
+                  const {data, status} = response;
+                  if (status === 200) {
+                    const pos = events.findIndex((x) => x._id === eventId);
+                    if (pos > -1) {
+                      events[pos] = data.result;
+                      setEvents(events);
+                    }
+                    ShowEvent(data.result);
+                    if (!user.illimte) setBalance(parseInt(balance, 10) - 1);
+                    const {socket} = this.context;
+                    socket.emit('requestChats');
+                    navigation.goBack();
+                  }
+                })
+                .catch(() => {
+                  this.setState({
+                    showAlert: true,
+                    title: texts.balanceErrorTitle,
+                    message: texts.balanceErrorText,
+                  });
+                });
+            }}>
+            Valider et payer 1 <IconFa color="gold" size={w(3)} name="coins" />
+          </Button>
+        </View>
+      </>
+    );
+  };
+
+  render() {
+    const {navigation} = this.props;
+    const {
+      state: {showAlert, title, message, spinner},
+      context: {pro},
+    } = this;
+    return (
+      <>
+        <Spinner visible={spinner} textContent="Loading..." textStyle={{color: '#FFF'}} />
+        <MainComponent bgColor={pro ? colors.proBlue : colors.brown}>
+          <HeaderComponent
+            navigation={navigation}
+            height={9}
+            fontsize={30}
+            type
+            showBackButton={false}
+            bgColor={pro ? colors.proBlue : colors.brown}
+          />
+          {this.Content()}
+        </MainComponent>
+        <AwesomeAlert
+          show={showAlert}
+          showProgress={false}
+          title={title}
+          message={message}
+          closeOnTouchOutside
+          closeOnHardwareBackPress={false}
+          showCancelButton={false}
+          showConfirmButton
+          confirmText="OK"
+          confirmButtonColor={pro ? colors.proBlue : colors.brown}
+          onConfirmPressed={() => {
+            this.hideAlert();
+          }}
+          onDismiss={() => {
+            this.hideAlert();
+          }}
+        />
+      </>
+    );
+  }
+}
+
+PublierEvent.propTypes = {
+  navigation: PropTypes.shape({
+    navigate: PropTypes.func.isRequired,
+    push: PropTypes.func.isRequired,
+    goBack: PropTypes.func.isRequired,
+  }).isRequired,
+};
+
+PublierEvent.contextType = NoobaContext;

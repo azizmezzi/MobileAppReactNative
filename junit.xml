@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites name="jest tests" tests="63" failures="0" errors="0" time="170.419">
+  <testsuite name="Step42" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="145.859" tests="1">
+    <testcase classname="Step42 should render" name="Step42 should render" time="0.034">
+    </testcase>
+  </testsuite>
+  <testsuite name="FelicitationDesincrir" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="145.918" tests="1">
+    <testcase classname="FelicitationDesincrir should render" name="FelicitationDesincrir should render" time="0.026">
+    </testcase>
+  </testsuite>
+  <testsuite name="Step3" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="146.045" tests="1">
+    <testcase classname="Step3 should render" name="Step3 should render" time="0.25">
+    </testcase>
+  </testsuite>
+  <testsuite name="ImageGlobal" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="146.154" tests="1">
+    <testcase classname="ImageGlobal should render" name="ImageGlobal should render" time="0.212">
+    </testcase>
+  </testsuite>
+  <testsuite name="Step2" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="146.623" tests="1">
+    <testcase classname="Step2 should render" name="Step2 should render" time="0.032">
+    </testcase>
+  </testsuite>
+  <testsuite name="ShareEvent" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="146.803" tests="1">
+    <testcase classname="ShareEvent should render" name="ShareEvent should render" time="0.938">
+    </testcase>
+  </testsuite>
+  <testsuite name="publier" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="147.043" tests="22">
+    <testcase classname="publier content view" name="publier content view" time="0.936">
+    </testcase>
+    <testcase classname="publier content view pro" name="publier content view pro" time="0.007">
+    </testcase>
+    <testcase classname="publier should render with event and balance = 3 and user limité  with step true" name="publier should render with event and balance = 3 and user limité  with step true" time="0.005">
+    </testcase>
+    <testcase classname="publier should render with event and balance = 0 and user illimite  with step true" name="publier should render with event and balance = 0 and user illimite  with step true" time="0.002">
+    </testcase>
+    <testcase classname="publier should render and save event promise with step true" name="publier should render and save event promise with step true" time="0.026">
+    </testcase>
+    <testcase classname="publier Hide Alert Test" name="publier Hide Alert Test" time="0.003">
+    </testcase>
+    <testcase classname="publier Show Catch Request Error Alert Test" name="publier Show Catch Request Error Alert Test" time="0.004">
+    </testcase>
+    <testcase classname="publier Publier Event" name="publier Publier Event" time="0.003">
+    </testcase>
+    <testcase classname="publier Fail Publier Event" name="publier Fail Publier Event" time="0.003">
+    </testcase>
+    <testcase classname="publier should render StepView and click annuler" name="publier should render StepView and click annuler" time="0.032">
+    </testcase>
+    <testcase classname="publier should render StepView and click valider and fail" name="publier should render StepView and click valider and fail" time="0.018">
+    </testcase>
+    <testcase classname="publier should render StepView and click valider and succeed" name="publier should render StepView and click valider and succeed" time="0.01">
+    </testcase>
+    <testcase classname="publier should render StepView and click valider and catch" name="publier should render StepView and click valider and catch" time="0.03">
+    </testcase>
+    <testcase classname="publier should render NonStepView and click annuler as normal user and event url null" name="publier should render NonStepView and click annuler as normal user and event url null" time="0.012">
+    </testcase>
+    <testcase classname="publier should render NonStepView and click annuler as normal user and event url null catch block" name="publier should render NonStepView and click annuler as normal user and event url null catch block" time="0.01">
+    </testcase>
+    <testcase classname="publier should render NonStepView and click annuler as normal user and event url a number" name="publier should render NonStepView and click annuler as normal user and event url a number" time="0.014">
+    </testcase>
+    <testcase classname="publier should render NonStepView and click annuler as normal user and event url not a number catch block" name="publier should render NonStepView and click annuler as normal user and event url not a number catch block" time="0.009">
+    </testcase>
+    <testcase classname="publier should render NonStepView and click valider as normal user with no balance and limited" name="publier should render NonStepView and click valider as normal user with no balance and limited" time="0.009">
+    </testcase>
+    <testcase classname="publier should render NonStepView and click valider as normal user with pos" name="publier should render NonStepView and click valider as normal user with pos" time="0.009">
+    </testcase>
+    <testcase classname="publier should render NonStepView and click valider as normal user with pos catch block" name="publier should render NonStepView and click valider as normal user with pos catch block" time="0.009">
+    </testcase>
+    <testcase classname="publier should render NonStepView and click valider as normal user with null pos" name="publier should render NonStepView and click valider as normal user with null pos" time="0.009">
+    </testcase>
+    <testcase classname="publier should render NonStepView and click valider as normal user with null pos catch block" name="publier should render NonStepView and click valider as normal user with null pos catch block" time="0.009">
+    </testcase>
+  </testsuite>
+  <testsuite name="ValidParticipation" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="148.509" tests="1">
+    <testcase classname="ValidParticipation should render" name="ValidParticipation should render" time="2.647">
+    </testcase>
+  </testsuite>
+  <testsuite name="Desincrir" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="148.546" tests="1">
+    <testcase classname="Desincrir should render" name="Desincrir should render" time="2.643">
+    </testcase>
+  </testsuite>
+  <testsuite name="Felicitation" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="148.825" tests="1">
+    <testcase classname="Felicitation should render" name="Felicitation should render" time="2.947">
+    </testcase>
+  </testsuite>
+  <testsuite name="Step6" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:52:21" time="3.752" tests="1">
+    <testcase classname="Step6 should render" name="Step6 should render" time="0.317">
+    </testcase>
+  </testsuite>
+  <testsuite name="Step5" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:52:21" time="3.75" tests="1">
+    <testcase classname="Step5 should render" name="Step5 should render" time="0.022">
+    </testcase>
+  </testsuite>
+  <testsuite name="Step0" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:52:21" time="3.398" tests="1">
+    <testcase classname="Step0 should render" name="Step0 should render" time="0.021">
+    </testcase>
+  </testsuite>
+  <testsuite name="Desincrir2" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:52:21" time="3.951" tests="1">
+    <testcase classname="Desincrir2 should render" name="Desincrir2 should render" time="0.505">
+    </testcase>
+  </testsuite>
+  <testsuite name="abonnement illimte" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:52:23" time="2.673" tests="3">
+    <testcase classname="abonnement illimte abonnement illimte snapShot" name="abonnement illimte abonnement illimte snapShot" time="0.014">
+    </testcase>
+    <testcase classname="abonnement illimte Hide Alert Test" name="abonnement illimte Hide Alert Test" time="0.004">
+    </testcase>
+    <testcase classname="abonnement illimte content view" name="abonnement illimte content view" time="0.106">
+    </testcase>
+  </testsuite>
+  <testsuite name="MainPage" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:52:22" time="4.773" tests="4">
+    <testcase classname="MainPage should render as normal User" name="MainPage should render as normal User" time="0.017">
+    </testcase>
+    <testcase classname="MainPage should render as pro" name="MainPage should render as pro" time="0.002">
+    </testcase>
+    <testcase classname="MainPage go to login" name="MainPage go to login" time="0.007">
+    </testcase>
+    <testcase classname="MainPage go to register" name="MainPage go to register" time="0.003">
+    </testcase>
+  </testsuite>
+  <testsuite name="Login" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:52:22" time="7.898" tests="19">
+    <testcase classname="Login should render as normal User" name="Login should render as normal User" time="0.018">
+    </testcase>
+    <testcase classname="Login should render as pro" name="Login should render as pro" time="0.004">
+    </testcase>
+    <testcase classname="Login Hide Alert Test" name="Login Hide Alert Test" time="0.005">
+    </testcase>
+    <testcase classname="Login Set Event Balance" name="Login Set Event Balance" time="0.104">
+    </testcase>
+    <testcase classname="Login Set Event Balance catch" name="Login Set Event Balance catch" time="0.107">
+    </testcase>
+    <testcase classname="Login Login FB" name="Login Login FB" time="0.003">
+    </testcase>
+    <testcase classname="Login responseInfoCallback error" name="Login responseInfoCallback error" time="0.004">
+    </testcase>
+    <testcase classname="Login responseInfoCallback Valid " name="Login responseInfoCallback Valid " time="0.008">
+    </testcase>
+    <testcase classname="Login responseInfoCallback Valid then fail" name="Login responseInfoCallback Valid then fail" time="0.011">
+    </testcase>
+    <testcase classname="Login Login Email" name="Login Login Email" time="0.006">
+    </testcase>
+    <testcase classname="Login Login Email Failed" name="Login Login Email Failed" time="1.005">
+    </testcase>
+    <testcase classname="Login Login Email user exist" name="Login Login Email user exist" time="1.008">
+    </testcase>
+    <testcase classname="Login pushNotif Test" name="Login pushNotif Test" time="0.175">
+    </testcase>
+    <testcase classname="Login submit Login Email" name="Login submit Login Email" time="0.021">
+    </testcase>
+    <testcase classname="Login submit Login Email Failed" name="Login submit Login Email Failed" time="0.008">
+    </testcase>
+    <testcase classname="Login go to register" name="Login go to register" time="0.006">
+    </testcase>
+    <testcase classname="Login go to ForgottenEmail" name="Login go to ForgottenEmail" time="0.004">
+    </testcase>
+    <testcase classname="Login onchange mail" name="Login onchange mail" time="0.007">
+    </testcase>
+    <testcase classname="Login onchange password" name="Login onchange password" time="0.009">
+    </testcase>
+  </testsuite>
+  <testsuite name="Step1" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:49:55" time="155.892" tests="1">
+    <testcase classname="Step1 should render" name="Step1 should render" time="0.031">
+    </testcase>
+  </testsuite>
+  <testsuite name="Event" errors="0" failures="0" skipped="0" timestamp="2021-07-19T13:52:21" time="11.196" tests="1">
+    <testcase classname="Event should render" name="Event should render" time="0.012">
+    </testcase>
+  </testsuite>
+</testsuites>

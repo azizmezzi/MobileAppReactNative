@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Nooba</string>
+    <string name="facebook_app_id">415855249486232</string>
+    <string name="fb_login_protocol_scheme">fb415855249486232</string>
+</resources>

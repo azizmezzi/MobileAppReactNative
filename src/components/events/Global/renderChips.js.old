@@ -1,0 +1,50 @@
+import React from 'react';
+import {View} from 'react-native';
+import {Chip} from 'react-native-paper';
+import texts from '../../../constant/texts';
+import {totalSize, w} from '../../../tools/Dimensions';
+import colors from '../../../constant/colors';
+
+export const selectInteret = (interests, interet, setInterets, setAlert) => {
+  if (interests.includes(interet)) {
+    interests.splice(interests.indexOf(interet), 1);
+  } else if (interests.length < 5) {
+    interests.push(interet);
+  } else if (interests.length === 5) {
+    setAlert({
+      showAlert: true,
+      title: texts.invalid_event_interests_length_title,
+      message: texts.invalid_event_interests_length_text,
+    });
+  }
+  setInterets(interests);
+};
+
+export const renderSecondaryContent = (item, interests, selectInteretFun) => {
+  return (
+    <View style={{flexWrap: 'wrap', flexDirection: 'row', marginLeft: w(5)}}>
+      {item.map((interet) => (
+        <View
+          style={{
+            margin: 5,
+          }}>
+          <Chip
+            mode="flat"
+            selectedColor="white"
+            selected={interests.includes(interet)}
+            height={30}
+            onPress={() => {
+              selectInteretFun(interests, interet);
+            }}
+            style={{
+              backgroundColor: interests.includes(interet) ? colors.brown : 'rgba(220,220,220,0.2)',
+              borderColor: 'white',
+            }}
+            textStyle={{color: 'white', fontSize: totalSize(2)}}>
+            {interet}
+          </Chip>
+        </View>
+      ))}
+    </View>
+  );
+};
